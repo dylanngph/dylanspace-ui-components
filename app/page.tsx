@@ -12,7 +12,7 @@ import {
 } from "@/registry/components/vn-address-selector";
 
 const INSTALL_CMD =
-  "npx shadcn@latest add https://dylanspace.com/projects/vn-selectors/registry/province-select.json";
+  "npx shadcn@latest add https://ui.dylanspace.com/r/vn-province-selectors.json";
 
 function Hero() {
   return (
@@ -36,7 +36,7 @@ function Hero() {
               asChild
               className="px-5"
             >
-              <a href="https://dylanspace.com/projects/vn-selectors/registry/province-select.json">
+              <a href="https://ui.dylanspace.com/r/vn-province-selectors.json">
                 View registry manifest
               </a>
             </Button>
