@@ -1,0 +1,68 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "dylanspace",
+  "homepage": "https://ui.dylanspace.com",
+  "items": [
+    {
+      "name": "vn-province-selectors",
+      "type": "registry:ui",
+      "title": "Vietnamese Address Selector",
+      "description": "A modular cascading combobox address selector for Vietnamese addresses with system toggle (old vs new). Composable components: SystemToggle, ProvinceSelector, DistrictSelector, WardSelector. Old system: Province → District → Ward. New system: Province → Ward. All selectors support search.",
+      "registryDependencies": [
+        "radio-group",
+        "popover",
+        "command",
+        "button",
+        "label"
+      ],
+      "dependencies": [
+        "@radix-ui/react-radio-group",
+        "@radix-ui/react-popover",
+        "cmdk",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/components/vn-address-provider.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/components/vn-address-system-toggle.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/components/vn-address-province-selector.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/components/vn-address-district-selector.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/components/vn-address-ward-selector.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/components/vn-address-selector.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/lib/vn-address.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "registry/assets/provinces.json",
+          "type": "registry:lib"
+        },
+        {
+          "path": "registry/assets/wards.json",
+          "type": "registry:lib"
+        },
+        {
+          "path": "registry/assets/ward_mappings.json",
+          "type": "registry:lib"
+        }
+      ]
+    }
+  ]
+}
