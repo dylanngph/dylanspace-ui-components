@@ -1,295 +1,189 @@
-# Vietnamese Address Selector
+# DylanSpace UI Components
 
-A modular, composable shadcn/ui-style component for selecting Vietnamese addresses with cascading combobox selectors and system toggle (old vs new). Built with React Context for flexible composition, similar to shadcn's sidebar pattern.
+A collection of high-quality, accessible UI components built with React, TypeScript, and shadcn/ui. Components are designed to be composable, customizable, and ready for production use.
 
-## Features
+## Overview
 
-- 🔄 **System Toggle**: Radio group to switch between old system (with districts) and new system (2025, wards only)
-- 🔍 **Searchable Comboboxes**: All selectors support search functionality
-- 🧩 **Modular Components**: Composable components that can be used independently
-- 🗺️ **Cascading Selection**: 
-  - Old System: Province → District → Ward
-  - New System: Province → Ward
-- 📦 **React Context**: Shared state management via `VNAddressProvider`
-- 🎨 **Fully Customizable**: Dynamic props for all labels and behavior
+This repository hosts a curated set of UI components that extend the shadcn/ui ecosystem. All components follow shadcn's design principles:
+
+- 🎨 **Copy and paste** - Components are yours to own and modify
+- 🧩 **Composable** - Built with composition in mind
+- ♿ **Accessible** - Built on Radix UI primitives
+- 🎯 **Type-safe** - Full TypeScript support
+- 🎨 **Customizable** - Styled with Tailwind CSS
 
 ## Installation
 
-### Via shadcn CLI
+### Prerequisites
+
+- React 18+ or Next.js 13+ (App Router)
+- Tailwind CSS configured
+- shadcn/ui base components installed
+
+### Installing Components
+
+Components can be installed via the shadcn CLI using their registry URLs:
 
 ```bash
-npx shadcn@latest add https://your-domain.com/registry/vn-address-selector.json
+# Install a component
+npx shadcn@latest add https://ui.dylanspace.com/r/[component-name].json
 ```
 
-### Manual Installation
+Each component has its own registry manifest that includes all necessary files, dependencies, and instructions.
 
-1. Copy all component files to your project:
-   ```bash
-   cp registry/components/*.tsx components/ui/
-   cp registry/lib/vn-address.ts registry/lib/vn-address.ts
-   cp registry/assets/*.json registry/assets/
-   ```
+## Available Components
+
+### [Vietnamese Address Selector](./docs/vn-address-selector.md)
+
+A modular, composable component for selecting Vietnamese addresses with cascading combobox selectors and system toggle (old vs new administrative systems).
+
+**Install:**
+```bash
+npx shadcn@latest add https://ui.dylanspace.com/r/vn-province-selectors.json
+```
+
+**Features:**
+- System toggle between old (with districts) and new (2025, wards only) systems
+- Searchable comboboxes for all selectors
+- Cascading selection logic
+- React Context for flexible composition
+- Fully customizable labels and behavior
+
+[View full documentation →](./docs/vn-address-selector.md)
+
+---
+
+_More components coming soon!_
+
+## Project Structure
+
+```
+ui-components/
+├── app/                    # Next.js app directory (demo site)
+├── components/
+│   └── ui/                 # Base shadcn/ui components
+├── registry/
+│   ├── components/         # Component source files
+│   ├── lib/                # Shared utilities and types
+│   └── assets/             # Static assets (JSON data, etc.)
+├── public/
+│   └── r/                  # Registry manifests (JSON files)
+├── registry.json           # Main registry index
+└── components.json         # shadcn/ui configuration
+```
+
+## Development
+
+### Setup
+
+1. Clone the repository:
+```bash
+git clone https://github.com/your-org/ui-components.git
+cd ui-components
+```
 
 2. Install dependencies:
-   ```bash
-   npm install @radix-ui/react-radio-group @radix-ui/react-popover cmdk lucide-react
-   ```
-
-## Component Structure
-
-The component is split into modular, composable pieces:
-
-- **`VNAddressProvider`** - Context provider that manages all state
-- **`VNAddressSystemToggle`** - Radio group for system selection
-- **`VNAddressProvinceSelector`** - Combobox for province selection
-- **`VNAddressDistrictSelector`** - Combobox for district selection (old system only)
-- **`VNAddressWardSelector`** - Combobox for ward selection
-- **`VNAddressSelector`** - All-in-one wrapper component (for convenience)
-- **`useVNAddress`** - Hook to access context state
-
-## Usage
-
-### All-in-One Component (Simplest)
-
-```tsx
-import { VNAddressSelector } from "@/components/ui/vn-address-selector";
-
-export default function AddressForm() {
-  return (
-    <VNAddressSelector
-      onSelectionChange={(selection) => {
-        console.log("System:", selection.system);
-        console.log("Province:", selection.province?.name);
-        console.log("District:", selection.district);
-        console.log("Ward:", selection.ward);
-      }}
-    />
-  );
-}
+```bash
+pnpm install
 ```
 
-### Composition Pattern (Like shadcn Sidebar)
-
-```tsx
-import {
-  VNAddressProvider,
-  VNAddressSystemToggle,
-  VNAddressProvinceSelector,
-  VNAddressDistrictSelector,
-  VNAddressWardSelector,
-} from "@/components/ui/vn-address-selector";
-
-export default function AddressForm() {
-  return (
-    <VNAddressProvider
-      onSelectionChange={(selection) => {
-        console.log(selection);
-      }}
-    >
-      <div className="space-y-6">
-        <VNAddressSystemToggle />
-        <VNAddressProvinceSelector />
-        <VNAddressDistrictSelector />
-        <VNAddressWardSelector />
-      </div>
-    </VNAddressProvider>
-  );
-}
+3. Run the development server:
+```bash
+pnpm dev
 ```
 
-### Custom Layout
-
-```tsx
-import {
-  VNAddressProvider,
-  VNAddressSystemToggle,
-  VNAddressProvinceSelector,
-  VNAddressDistrictSelector,
-  VNAddressWardSelector,
-} from "@/components/ui/vn-address-selector";
-
-export default function CustomLayout() {
-  return (
-    <VNAddressProvider>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <VNAddressSystemToggle />
-        <VNAddressProvinceSelector />
-        <VNAddressDistrictSelector />
-        <VNAddressWardSelector />
-      </div>
-    </VNAddressProvider>
-  );
-}
+4. Build the registry:
+```bash
+pnpm registry:build
 ```
 
-### Using the Hook
+### Adding a New Component
 
-```tsx
-import {
-  VNAddressProvider,
-  useVNAddress,
-  VNAddressProvinceSelector,
-  VNAddressWardSelector,
-} from "@/components/ui/vn-address-selector";
+1. Create component files in `registry/components/`
+2. Add shared utilities to `registry/lib/` if needed
+3. Add assets to `registry/assets/` if required
+4. Create a registry manifest in `public/r/[component-name].json`
+5. Add the component entry to `registry.json`
+6. Create component-specific documentation in `docs/[component-name].md`
+7. Update this README with the new component
 
-function AddressDisplay() {
-  const { selection } = useVNAddress();
-  
-  return (
-    <div>
-      <VNAddressProvinceSelector />
-      <VNAddressWardSelector />
-      
-      {selection.province && (
-        <div>
-          Selected: {selection.province.name}
-          {selection.district && `, ${selection.district}`}
-          {selection.ward && `, ${selection.ward.name}`}
-        </div>
-      )}
-    </div>
-  );
-}
+### Component Structure
 
-export default function Page() {
-  return (
-    <VNAddressProvider>
-      <AddressDisplay />
-    </VNAddressProvider>
-  );
-}
+Each component should follow this structure:
+
+```
+registry/
+├── components/
+│   └── [component-name]/
+│       ├── [component-name].tsx        # Main component
+│       ├── [component-name]-provider.tsx # Context provider (if needed)
+│       └── [component-name]-[sub].tsx  # Sub-components
+├── lib/
+│   └── [component-name].ts             # Utilities and types
+└── assets/
+    └── [component-name]-data.json      # Static data (if needed)
 ```
 
-## Component Props
+### Registry Manifest
 
-### VNAddressProvider
+Each component needs a registry manifest JSON file in `public/r/` that follows the shadcn registry schema:
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `onSelectionChange` | `function` | - | Callback when selection changes |
-| `defaultSystem` | `"old" \| "new"` | `"new"` | Initial system selection |
-| `defaultProvinceCode` | `string` | - | Initial province code |
-| `defaultDistrict` | `string` | - | Initial district name |
-| `defaultWardCode` | `string` | - | Initial ward code |
-| `children` | `ReactNode` | - | Child components |
-
-### VNAddressSystemToggle
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `label` | `string` | `"Hệ thống"` | Label text |
-| `showLabel` | `boolean` | `true` | Show label |
-| `className` | `string` | - | Custom className |
-
-### VNAddressProvinceSelector
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `label` | `string` | `"Tỉnh/Thành phố"` | Label text |
-| `showLabel` | `boolean` | `true` | Show label |
-| `className` | `string` | - | Custom className |
-| `placeholder` | `string` | - | Placeholder text |
-
-### VNAddressDistrictSelector
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `label` | `string` | `"Quận/Huyện"` | Label text |
-| `showLabel` | `boolean` | `true` | Show label |
-| `className` | `string` | - | Custom className |
-| `placeholder` | `string` | - | Placeholder text |
-
-**Note**: Only renders when old system is selected and province is chosen.
-
-### VNAddressWardSelector
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `label` | `string` | `"Phường/Xã"` | Label text |
-| `showLabel` | `boolean` | `true` | Show label |
-| `className` | `string` | - | Custom className |
-| `placeholder` | `string` | - | Placeholder text |
-
-### VNAddressSelector (All-in-One)
-
-All props from `VNAddressProvider` plus:
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `systemLabel` | `string` | `"Hệ thống"` | System toggle label |
-| `provinceLabel` | `string` | `"Tỉnh/Thành phố"` | Province label |
-| `districtLabel` | `string` | `"Quận/Huyện"` | District label |
-| `wardLabel` | `string` | `"Phường/Xã"` | Ward label |
-| `showLabels` | `boolean` | `true` | Show all labels |
-| `children` | `ReactNode` | - | Custom children (uses composition) |
-
-## useVNAddress Hook
-
-Access the context state and methods:
-
-```tsx
-const {
-  system,                    // "old" | "new"
-  selectedProvinceCode,       // string | null
-  selectedDistrict,           // string | null
-  selectedWardCode,           // string | null
-  selectedProvince,           // Province | null
-  availableDistricts,         // string[]
-  oldWardsForDistrict,        // Array<{ code, name }>
-  newWardsForProvince,        // Ward[]
-  selectedWard,               // Ward | { code, name } | null
-  districtMappings,           // WardMapping[]
-  selection,                  // Complete selection object
-  setSystem,                  // (system) => void
-  setSelectedProvinceCode,    // (code) => void
-  setSelectedDistrict,        // (district) => void
-  setSelectedWardCode,        // (code) => void
-} = useVNAddress();
-```
-
-## Selection Object
-
-The `onSelectionChange` callback receives:
-
-```typescript
+```json
 {
-  system: "old" | "new";
-  province: Province | null;
-  district: string | null; // old system only
-  ward: Ward | { code: string; name: string } | null;
-  mappings?: WardMapping[]; // old system only
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "component-name",
+  "type": "registry:ui",
+  "title": "Component Title",
+  "description": "Component description",
+  "registryDependencies": ["button", "input"],
+  "dependencies": ["@radix-ui/react-dialog"],
+  "files": [
+    {
+      "path": "registry/components/component.tsx",
+      "type": "registry:ui"
+    }
+  ]
 }
 ```
 
-## System Modes
+## Documentation
 
-### Old System (Hệ thống cũ)
-- **Flow**: Province → District → Ward
-- Shows districts from the old administrative system
-- Shows old wards for selected district
-- Provides mappings data in callback
-
-### New System (Hệ thống mới - 2025)
-- **Flow**: Province → Ward
-- Uses the new 2025 administrative system
-- No districts, only provinces and wards
-- Direct ward selection
-
-## Data Structure
-
-All data is hardcoded in the components and loaded from the `registry/` folder:
-- `registry/lib/vn-address.ts` - Utility functions and type definitions
-- `registry/assets/provinces.json` - All provinces
-- `registry/assets/wards.json` - All wards (new system)
-- `registry/assets/ward_mappings.json` - Mappings between old and new systems
+- **General documentation**: This README
+- **Component-specific docs**: See `docs/` directory
+  - [Vietnamese Address Selector](./docs/vn-address-selector.md)
 
 ## Requirements
 
-- React 18+
-- Next.js 13+ (App Router) or React with proper path aliases
-- shadcn/ui components: `radio-group`, `popover`, `command`, `button`, `label`
-- Tailwind CSS
+- **React**: 18+
+- **Next.js**: 13+ (App Router) or React with proper path aliases
+- **TypeScript**: 5+
+- **Tailwind CSS**: 4+
+- **shadcn/ui**: Base components installed
+
+## Tech Stack
+
+- [Next.js](https://nextjs.org/) - React framework
+- [React](https://react.dev/) - UI library
+- [TypeScript](https://www.typescriptlang.org/) - Type safety
+- [Tailwind CSS](https://tailwindcss.com/) - Styling
+- [Radix UI](https://www.radix-ui.com/) - Accessible primitives
+- [shadcn/ui](https://ui.shadcn.com/) - Component system
+
+## Contributing
+
+Contributions are welcome! Please follow these guidelines:
+
+1. Follow the existing component structure and patterns
+2. Ensure all components are accessible and type-safe
+3. Include comprehensive documentation
+4. Add examples and demos in the app directory
+5. Update the registry manifest and this README
 
 ## License
 
 MIT
+
+## Links
+
+- **Homepage**: [https://ui.dylanspace.com](https://ui.dylanspace.com)
+- **Registry**: [https://ui.dylanspace.com/r/registry.json](https://ui.dylanspace.com/r/registry.json)
