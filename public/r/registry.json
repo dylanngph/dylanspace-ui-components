@@ -23,43 +23,47 @@
       ],
       "files": [
         {
-          "path": "registry/components/vn-address-provider.tsx",
+          "path": "registry/vn-province-selectors/components/vn-address-provider.tsx",
           "type": "registry:ui"
         },
         {
-          "path": "registry/components/vn-address-system-toggle.tsx",
+          "path": "registry/vn-province-selectors/components/vn-address-system-toggle.tsx",
           "type": "registry:ui"
         },
         {
-          "path": "registry/components/vn-address-province-selector.tsx",
+          "path": "registry/vn-province-selectors/components/vn-address-province-selector.tsx",
           "type": "registry:ui"
         },
         {
-          "path": "registry/components/vn-address-district-selector.tsx",
+          "path": "registry/vn-province-selectors/components/vn-address-district-selector.tsx",
           "type": "registry:ui"
         },
         {
-          "path": "registry/components/vn-address-ward-selector.tsx",
+          "path": "registry/vn-province-selectors/components/vn-address-ward-selector.tsx",
           "type": "registry:ui"
         },
         {
-          "path": "registry/components/vn-address-selector.tsx",
+          "path": "registry/vn-province-selectors/components/vn-address-selector.tsx",
           "type": "registry:ui"
         },
         {
-          "path": "registry/lib/vn-address.ts",
+          "path": "registry/vn-province-selectors/lib/vn-address.ts",
           "type": "registry:lib"
         },
         {
-          "path": "registry/assets/provinces.json",
+          "path": "registry/vn-province-selectors/lib/vn-search.ts",
           "type": "registry:lib"
         },
         {
-          "path": "registry/assets/wards.json",
+          "path": "registry/vn-province-selectors/assets/provinces.json",
           "type": "registry:lib"
         },
         {
-          "path": "registry/assets/ward_mappings.json",
+          "path": "registry/vn-province-selectors/assets/wards.json",
+          "type": "registry:lib"
+        },
+        {
+          "path": "registry/vn-province-selectors/assets/ward_mappings.json",
           "type": "registry:lib"
         }
       ]

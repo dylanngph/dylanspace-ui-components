@@ -9,7 +9,7 @@ import {
   VNAddressDistrictSelector,
   VNAddressWardSelector,
   useVNAddress,
-} from "@/registry/components/vn-address-selector";
+} from "@/registry/vn-province-selectors/components/vn-address-selector";
 
 const INSTALL_CMD =
   "npx shadcn@latest add https://ui.dylanspace.com/r/vn-province-selectors.json";
